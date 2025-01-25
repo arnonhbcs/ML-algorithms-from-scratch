@@ -59,6 +59,7 @@ class LinearRegressor(SupervisedModel):
         :return: Gradients of the loss with respect to theta and b.
         :rtype: tuple(ndarray, float)
         """
+         
         err = -(y - X.T @ self.theta - self.b) / (2 * y.shape[0])
         dtheta = X @ err
         db = np.sum(err)
@@ -83,12 +84,6 @@ class LinearRegressor(SupervisedModel):
         :param verbose: Set true to plot training history.
         :type verbose: bool
         """
-        if not self.stochastic:
-            self.theta = np.zeros((X.shape[0], 1))
-            self.b = 0.0
-        else:
-            pass
-
         loss_vals = []
         epochs = []
 
