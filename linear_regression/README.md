@@ -1,33 +1,41 @@
 # General Regression Problem
 In statistics, a general regression problem consists in fitting a function $f: R^D \to R$ such as, for every instance $(x_n, y_n)$ of our training set:
 
-$y_n = f(\textbf{x}_n) + \epsilon, \ \ \epsilon \ \tilde \ N(0, \sigma^2)$
+$$
+y_n = f(\mathbf{x_n}) + \epsilon, \ \ \epsilon \ \tilde \ N(0, \sigma^2)
+$$
 
 where the variance $\sigma^2$ is known.
 
 # Linear Regression
-In linear regression, we will fit a function $f(\textbf{x}) = x^T \theta + \textbf{b} $, such that $\textbf{\theta}$ and $\textbf{b}$ are, respectively, the parameters and bias vectors. In this implementation, we will use the *maximum likelihood method*, a statistical method that consists in maximizing the probability $p(y | x)$ (more specifically, we will minimize $\log(p(y|x)))$.
+In linear regression, we will fit a function $f(\mathbf{x}) = x^T \mathbf{\theta} + \mathbf{b} $, such that $\mathbf{\theta}$ and $\mathbf{b}$ are, respectively, the parameters and bias vectors. In this implementation, we will use the *maximum likelihood method*, a statistical method that consists in maximizing the probability $p(y | x)$ (more specifically, we will minimize log($p(y|x)$)).
 
 ## Loss Function
-Given that our sample is iid (independent, identically distributed), we can assume $y_n \ \tilde \ N (f(\textbf{x}), \sigma^2)$:
+Given that our sample is iid (independent, identically distributed), we can assume $y_n \ \tilde \ N (f(\mathbf{x}), \sigma^2)$:
 
-$\log[p(y | x)] = log [\Pi_{i}^{N} exp(-(y - x^T \theta - b))^2 / (2 \sigma^2)] = \frac{1}{\sigma^2} \cdot \sum_ {i}^{N} (y - x^T \theta - b)^2$
+$$
+log[p(y | x)] = log [\Pi_{i}^{N} exp(-(y - x^T \theta - b))^2 / (2 \sigma^2)] = \frac{1}{\sigma^2} \cdot \sum_ {i}^{N} (y - x^T \theta - b)^2
+$$
 
-Take the loss function $L(\textbf{\theta}, \textbf{b}) = \frac{1}{N} \cdot \sum_ {i}^{N} (y - x^T \cdot \theta - b)^2$. We must find $\theta$ and $b$ to minimize this function. This will be done using the Gradient Descent Algorithm.
+Take the loss function $L(\mathbf{\theta}, \mathbf{b}) = \frac{1}{N} \cdot \sum_ {i}^{N} (y - x^T \cdot \theta - b)^2$. We must find $\theta$ and $b$ to minimize this function. This will be done using the Gradient Descent Algorithm.
 
 ## Gradient Descent
-Gradient Descent is an optimization algorithm used to minimize the loss function by iteratively updating the parameters $\textbf{\theta}$ and $\textbf{b}$ using the gradients of the loss function.
+Gradient Descent is an optimization algorithm used to minimize the loss function by iteratively updating the parameters $\mathbf{\theta}$ and $\mathbf{b}$ using the gradients of the loss function.
 
 The update rules for Gradient Descent are as follows:
 
-1. Initialize $\textbf{\theta}$ and $\textbf{b}$ randomly or with predefined values.
-2. Compute the gradient of the loss function with respect to $\textbf{\theta}$ and $\textbf{b}$:
+1. Initialize $\mathbf{\theta}$ and $\mathbf{b}$ randomly or with predefined values.
+2. Compute the gradient of the loss function with respect to $\mathbf{\theta}$ and $\mathbf{b}$:
 
-$\frac{\partial L}{\partial \theta} = -\frac{2}{N} \cdot \sum_{i=1}^N (y_i - x_i^T \theta - b) \cdot x_i, \quad \frac{\partial L}{\partial b} = -\frac{2}{N} \cdot \sum_{i=1}^N (y_i - x_i^T \theta - b)$
+$$
+\frac{\partial L}{\partial \theta} = -\frac{2}{N} \cdot \sum_{i=1}^N (y_i - x_i^T \theta - b) \cdot x_i, \quad \frac{\partial L}{\partial b} = -\frac{2}{N} \cdot \sum_{i=1}^N (y_i - x_i^T \theta - b)
+$$
 
 3. Update the parameters using the gradients and a learning rate $\eta$:
 
-$\textbf{\theta} \leftarrow \textbf{\theta} - \eta \cdot \frac{\partial L}{\partial \theta}, \quad \textbf{b} \leftarrow \textbf{b} - \eta \cdot \frac{\partial L}{\partial b}$
+$$
+\mathbf{\theta} \leftarrow \mathbf{\theta} - \eta \cdot \frac{\partial L}{\partial \theta}, \quad \mathbf{b} \leftarrow \mathbf{b} - \eta \cdot \frac{\partial L}{\partial b}
+$$
 
 4. Repeat until convergence or for a predefined number of iterations.
 
@@ -37,16 +45,20 @@ The maximum likelihood approach is prone to overfitting, which is when a model f
 ### L1 Regularization:
 L1 regularization, also known as Lasso regularization, adds a penalty proportional to the absolute values of the parameters to the loss function. The modified loss function becomes:
 
-$L(\textbf{\theta}, \textbf{b}) = \frac{1}{N} \cdot \sum_{i}^{N} (y - x^T \cdot \theta - b)^2 + \lambda \cdot \sum_{j} |\theta_j|$
+$$
+L(\mathbf{\theta}, \mathbf{b}) = \frac{1}{N} \cdot \sum_{i}^{N} (y - x^T \cdot \theta - b)^2 + \lambda \cdot \sum_{j} |\theta_j|
+$$
 
 where $\lambda$ is a hyperparameter controlling the strength of regularization.
 
-L1 regularization encourages sparsity in $\textbf{\theta}$, leading to some coefficients being exactly zero, effectively performing feature selection. It is useful when working with high-dimensional data or when interpretability of the model is important.
+L1 regularization encourages sparsity in $\mathbf{\theta}$, leading to some coefficients being exactly zero, effectively performing feature selection. It is useful when working with high-dimensional data or when interpretability of the model is important.
 
 ### L2 Regularization:
 L2 regularization, also known as Ridge regularization, adds a penalty proportional to the square of the parameters to the loss function. The modified loss function becomes:
 
-$L(\textbf{\theta}, \textbf{b}) = \frac{1}{N} \cdot \sum_{i}^{N} (y - x^T \cdot \theta - b)^2 + \lambda \cdot \sum_{j} \theta_j^2$
+$$
+L(\mathbf{\theta}, \mathbf{b}) = \frac{1}{N} \cdot \sum_{i}^{N} (y - x^T \cdot \theta - b)^2 + \lambda \cdot \sum_{j} \theta_j^2
+$$
 
 Unlike L1, L2 regularization does not promote sparsity but shrinks all parameters toward zero, helping to prevent overfitting and improve the generalization of the model. It is particularly effective when all features are relevant but need to be controlled in magnitude.
 
