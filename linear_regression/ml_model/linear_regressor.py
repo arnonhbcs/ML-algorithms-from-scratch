@@ -1,11 +1,10 @@
 from supervised_model import SupervisedModel
 import numpy as np
-from math import floor
 import matplotlib.pyplot as plt
 from linear_regressor_parameters import *
 
 class LinearRegressor(SupervisedModel):
-    def __init__(self, alpha=LEARNING_RATE, lambda_=L2_REGULARIZATION_RATE, regularization='l2', stochastic=False):
+    def __init__(self, alpha=LEARNING_RATE, lambda_=L2_REGULARIZATION_RATE, regularization='l2'):
         """
         Implements the Linear Regression Algorithm
         :param alpha: Learning rate.
@@ -23,7 +22,6 @@ class LinearRegressor(SupervisedModel):
         self.alpha = alpha
         self.lambda_ = lambda_
         self.regularization = regularization
-        self.stochastic = stochastic
 
     def compute_loss(self, X, y):
         """
@@ -59,7 +57,6 @@ class LinearRegressor(SupervisedModel):
         :return: Gradients of the loss with respect to theta and b.
         :rtype: tuple(ndarray, float)
         """
-         
         err = -(y - X.T @ self.theta - self.b) / (2 * y.shape[0])
         dtheta = X @ err
         db = np.sum(err)
@@ -122,7 +119,9 @@ class LinearRegressor(SupervisedModel):
         Calculates the R-squared metric.
         :param X: Inputs from training set.
         :param y: Outputs from training set.
+        :rtype: float
         """
+        super.Rsquared(X)
         y_hat = self.predict(X)
         y_mean = np.mean(y)
 

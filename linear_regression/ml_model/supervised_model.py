@@ -11,6 +11,10 @@ class SupervisedModel:
     @abstractmethod    
     def fit(self, X, y):
         pass
+    @abstractmethod
     def predict(self, X):
+        pass
+    @abstractmethod
+    def Rsquared(self, X):
         pass
 

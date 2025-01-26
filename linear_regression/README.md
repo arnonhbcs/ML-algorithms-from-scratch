@@ -74,8 +74,13 @@ Where $y_i$ are the actual values, $\hat{y}_i$ are the predicted values, and $\b
 
 
 # Examples:
+Two jupyter notebooks in the 'examples' directory
 
 ## Fuel Consumption Modeling 
+This dataset contains model-specific fuel consumption ratings and estimated carbon dioxide emissions for light-duty vehicles for retail sale in Canada. It has data from vehicles ranging from 1995 to 2014. It has been made avaliable by the Canadian Goverment at: https://open.canada.ca/data/en/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64?utm_medium=Exinfluencer&utm_source=Exinfluencer&utm_content=000026UJ&utm_term=10006555&utm_id=NA-SkillsNetwork-Channel-SkillsNetworkCoursesIBMDeveloperSkillsNetworkML0101ENSkillsNetwork1047-2023-01-01
+
+### Plots and Insight
+ 
 
 ## Aerodynamic Properties of Rectangular Wings
 This dataset is a product of an experiment, which was conducted as a part of the Aerodynamics program of Instituto Tecnológico de Aeronáutica (ITA) for undergraduate students in Aerospace Engineering. It consisted in analyzing the aerodynamic behavior of different wings of infinite aspect ratio, which means these wings have the same length as the tunnel, and compare it with avaliable literature.
@@ -88,7 +93,7 @@ These forces are commonly normalized by the dinamic pressure of the air ($q_\inf
 
 $C_L = \frac{L}{S \cdot q_\inf} \ , \ C_D = \frac{D}{S q\inf} \ , \ C_M = \frac{M}{S c q\inf}$ 
 
-Where S and c are the area and the chord of the wing, respectively. In this particular case, we will use linear regression to obtain $C_L$ as a function of the angle of attack: $C_L = C_{L, \alpha} \cdot (\alpha - \alpha_{L=0})$. From the literature, we should expect the following linear pattern.
+Where S and c are the area and the chord of the wing, respectively. In this particular case, we will use linear regression to obtain $C_L$ as a **linear** function of the angle of attack: $C_L = C_{L, \alpha} \cdot (\alpha - \alpha_{L=0})$ and $C_D$ as a quadratic function of $C_L$ ($C_D = C_{D,0} + K_1 C_L + K C_L^2$). From the literature, we should expect the following patterns.
 
 ![$C_L vs \alpha$](images/cla_anderson.png)
 
@@ -97,7 +102,10 @@ Wind tunnels are used to resemble flight conditions. The experimentalists have i
 
 ![Wind Tunnel](images/wind_tunnel.png). \ ![Rectangular wings](images/wings.png).
 
-### Results for the NACA 0012 rectangular Wing
+### Results Obtained:
+Two instances of this linear regression implementation were made, and the following patterns were obtained:
+
+
 
 
 
