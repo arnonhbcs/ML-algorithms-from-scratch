@@ -63,13 +63,21 @@ $$
 
 Unlike L1, L2 regularization does not promote sparsity but shrinks all parameters toward zero, helping to prevent overfitting and improve the generalization of the model. It is particularly effective when all features are relevant but need to be controlled in magnitude.
 
-## R-squared:
-$R^2$ measures the proportion of the variance in the target variable that is explained by the features in the model. It is computed as follows.
+### \( R^2 \): Coefficient of Determination
 
-$ R^2 = 1 - \frac{\sum (y - \hat{y})^2}{\sum (y - \bar{y})^2} $
+The \( R^2 \) metric, or coefficient of determination, measures how well a regression model explains the variance in the dependent variable (\( y \)). It ranges from 0 to 1, where higher values indicate better model performance. The formula is:
 
+$$
+R^2 = 1 - \frac{\sum_{i=1}^N (y_i - \hat{y}_i)^2}{\sum_{i=1}^N (y_i - \bar{y})^2}
+$$
 
-Where $y_i$ are the actual values, $\hat{y}_i$ are the predicted values, and $\bar{y}$ is the mean of the actual values. An $R^2$ of 1 indicates perfect predictions, while 0 means the model performs no better than predicting the mean.
+Here:
+- \( y_i \): Observed values.
+- \( \hat{y}_i \): Predicted values.
+- \( \bar{y} \): Mean of observed values.
+- \( N \): Number of observations.
+
+An \( R^2 \) value close to 1 indicates that the model explains most of the variability in \( y \).
 
 
 # Example: Fuel Consumption Modeling
