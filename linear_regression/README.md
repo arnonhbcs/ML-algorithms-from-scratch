@@ -67,9 +67,7 @@ Unlike L1, L2 regularization does not promote sparsity but shrinks all parameter
 
 ### R²: Coefficient of Determination
 
-The R² metric, or coefficient of determination, measures how well a regression model explains the variance in the dependent variable (y). It ranges from 0 to 1, where higher values indicate better model performance. The formula is:
-
-$R^2 = 1 - \frac{\sum_{i=1}^N (y_i - \hat{y}_i)^2}{\sum_{i=1}^N (y_i - \bar{y})^2}$
+The R² metric, or coefficient of determination, measures how well a regression model explains the variance in the dependent variable (y). It ranges from 0 to 1, where higher values indicate better model performance. The formula is: $R^2 = 1 - \frac{\sum_{i=1}^N (y_i - \hat{y}_i)^2}{\sum_{i=1}^N (y_i - \bar{y})^2}$
 
 Where:
 - $y_i$: Observed values.
