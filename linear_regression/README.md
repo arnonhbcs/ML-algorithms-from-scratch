@@ -66,7 +66,7 @@ Unlike L1, L2 regularization does not promote sparsity but shrinks all parameter
 ## $R^2$:
 $R^2$ measures the proportion of the variance in the target variable that is explained by the features in the model. It is computed as:
 
-$ R^2 = 1 - \frac{\sum_{i=1}^N (y_i - \hat{y}_{i})^2}{\sum_{i=1}^{N} (y_i - \bar{y})^2} $ 
+$R^2 = 1 - \frac{\sum_{i=1}^N (y_i - \hat{y}_{i})^2}{\sum_{i=1}^{N} (y_i - \bar{y})^2}$ 
 
 
 Where $y_i$ are the actual values, $\hat{y}_i$ are the predicted values, and $\bar{y}$ is the mean of the actual values. An $R^2$ of 1 indicates perfect predictions, while 0 means the model performs no better than predicting the mean.
