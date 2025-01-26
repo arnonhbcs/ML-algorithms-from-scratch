@@ -8,13 +8,13 @@ $$
 where the variance $\sigma^2$ is known.
 
 # Linear Regression
-In linear regression, we will fit a function $f(\mathbf{x}) = x^T \mathbf{\theta} + \mathbf{b} $, such that $\mathbf{\theta}$ and $\mathbf{b}$ are, respectively, the parameters and bias vectors. In this implementation, we will use the *maximum likelihood method*, a statistical method that consists in maximizing the probability $p(y | x)$ (more specifically, we will minimize log($p(y|x)$)).
+In linear regression, we will fit a function $f(\mathbf{x}) = x^T \mathbf{\theta} + \mathbf{b} $, such that $\mathbf{\theta}$ and $\mathbf{b}$ are, respectively, the parameters and bias vectors. In this implementation, we will use the *maximum likelihood method*, a statistical method that consists in maximizing the probability $p(y | x)$ (more specifically, we will minimize $\log($p(y|x)))$.
 
 ## Loss Function
 Given that our sample is iid (independent, identically distributed), we can assume $y_n \ \tilde \ N (f(\mathbf{x}), \sigma^2)$
 
 $$
-log[p(y | x)] = log [\Pi_{i}^{N} exp(-(y - x^T \theta - b))^2 / (2 \sigma^2)] = \frac{1}{\sigma^2} \cdot \sum_ {i}^{N} (y - x^T \theta - b)^2
+log[p(y | x)] = log [\Pi_{i}^{N} exp(-(y - x^T \theta - b))^2 / (2 \sigma^2)] = \frac{1}{\sigma^2} \cdot \sum_{i}^{N} (y - x^T \theta - b)^2
 $$
 
 Take the loss function $L(\mathbf{\theta}, \mathbf{b}) = \frac{1}{2N} \cdot \sum_ {i}^{N} (y - x^T \cdot \theta - b)^2$. We must find $\theta$ and $b$ to minimize this function. This will be done using the Gradient Descent Algorithm.
@@ -46,7 +46,7 @@ The maximum likelihood approach is prone to overfitting, which is when a model f
 L1 regularization, also known as Lasso regularization, adds a penalty proportional to the absolute values of the parameters to the loss function. The modified loss function becomes:
 
 $$
-L(\mathbf{\theta}, \mathbf{b}) = \frac{1}{N} \cdot \sum_{i}^{N} (y - x^T \cdot \theta - b)^2 + \lambda \cdot \sum_{j} |\theta_j|
+L(\mathbf{\theta}, \mathbf{b}) = \frac{1}{2N} \cdot \sum_{i}^{N} (y - x^T \cdot \theta - b)^2 + \lambda \cdot \sum_{j} |\theta_j|
 $$
 
 where $\lambda$ is a hyperparameter controlling the strength of regularization.
@@ -56,14 +56,49 @@ L1 regularization encourages sparsity in $\mathbf{\theta}$, leading to some coef
 ### L2 Regularization:
 L2 regularization, also known as Ridge regularization, adds a penalty proportional to the square of the parameters to the loss function. The modified loss function becomes:
 
+
 $$
-L(\mathbf{\theta}, \mathbf{b}) = \frac{1}{N} \cdot \sum_{i}^{N} (y - x^T \cdot \theta - b)^2 + \lambda \cdot \sum_{j} \theta_j^2
+L(\mathbf{\theta}, \mathbf{b}) = \frac{1}{N} \cdot \sum_{i}^{2N} (y - x^T \cdot \theta - b)^2 + \lambda \cdot \sum_{j} \theta_j^2
 $$
 
 Unlike L1, L2 regularization does not promote sparsity but shrinks all parameters toward zero, helping to prevent overfitting and improve the generalization of the model. It is particularly effective when all features are relevant but need to be controlled in magnitude.
 
+## $R^2$:
+$R^2$ measures the proportion of the variance in the target variable that is explained by the features in the model. It is computed as:
+
+$$
+R^2 = 1 - \frac{\sum_{i=1}^N (y_i - \hat{y}_i)^2}{\sum_{i=1}^N (y_i - \bar{y})^2}
+$$
+
+Where $y_i$ are the actual values, $\hat{y}_i$ are the predicted values, and $\bar{y}$ is the mean of the actual values. An $R^2$ of 1 indicates perfect predictions, while 0 means the model performs no better than predicting the mean.
+
+
 # Examples:
 
-## California Housing Prices Prediction:
+## Fuel Consumption Modeling 
 
-## Aerodynamic Properties of Rectangular Wings:
+## Aerodynamic Properties of Rectangular Wings
+This dataset is a product of an experiment, which was conducted as a part of the Aerodynamics program of Instituto Tecnológico de Aeronáutica (ITA) for undergraduate students in Aerospace Engineering. It consisted in analyzing the aerodynamic behavior of different wings of infinite aspect ratio, which means these wings have the same length as the tunnel, and compare it with avaliable literature.
+
+### Aerodynamic Coefficients
+
+Aerodynamic bodies such as wings and fuselage, while immersed in airflow with a determined speed, are subjected to an aerodynamic force, which is usually decomposed in Lift (L) and Drag (D), and the pitch moment (M). ![Forces in airfoil](images/airfoil.png).
+
+These forces are commonly normalized by the dinamic pressure of the air ($q_\inf$), so that we obtain the *aerodynamic coefficients*:
+
+$C_L = \frac{L}{S \cdot q_\inf} \ , \ C_D = \frac{D}{S q\inf} \ , \ C_M = \frac{M}{S c q\inf}$ 
+
+Where S and c are the area and the chord of the wing, respectively. In this particular case, we will use linear regression to obtain $C_L$ as a function of the angle of attack: $C_L = C_{L, \alpha} \cdot (\alpha - \alpha_{L=0})$. From the literature, we should expect the following linear pattern.
+
+![$C_L vs \alpha$](images/cla_anderson.png)
+
+### Wind Tunnel Experiment
+Wind tunnels are used to resemble flight conditions. The experimentalists have inserted wings with different airfoil (wing cross-section) shape and subjected it to different airspeeds. Some precision balances were positioned in order to measure aerodynamic forces, such as **lift** and **drag** and the **pitch momentum**.
+
+![Wind Tunnel](images/wind_tunnel.png). \ ![Rectangular wings](images/wings.png).
+
+### Results for the NACA 0012 rectangular Wing
+
+
+
+

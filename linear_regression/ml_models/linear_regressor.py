@@ -84,6 +84,8 @@ class LinearRegressor(SupervisedModel):
         :param verbose: Set true to plot training history.
         :type verbose: bool
         """
+        self.theta = np.zeros((X.shape[0], 1))
+        self.b = np.zeros((y.shape[0], 1))
         loss_vals = []
         epochs = []
 
@@ -114,3 +116,17 @@ class LinearRegressor(SupervisedModel):
         super().predict(X)
 
         return X.T @ self.theta + self.b
+    
+    def Rsquared(self, X, y):
+        """
+        Calculates the R-squared metric.
+        :param X: Inputs from training set.
+        :param y: Outputs from training set.
+        """
+        y_hat = self.predict(X)
+        y_mean = np.mean(y)
+
+        N = np.sum((y -y_hat)**2)
+        D = np.sum((y-y_mean)**2)
+
+        return 1 - N/D
