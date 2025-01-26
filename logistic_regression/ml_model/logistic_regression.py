@@ -52,6 +52,12 @@ def fit(self, X, y, verbose=True):
     """
     pass
 
+def sigmoid(self, z):
+    """
+    Computes Logistic Regression activation function.
+    """
+    return 1 / (1 + np.exp(-z))
+
 def predict(self, X):
     """
     Predicts outputs for the given input data.
@@ -63,4 +69,4 @@ def predict(self, X):
         """
     super().predict(X)
 
-    return X.T @ self.theta + self.b
+    return sigmoid(X.T @ self.theta + self.b)

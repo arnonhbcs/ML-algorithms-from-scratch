@@ -14,7 +14,3 @@ class SupervisedModel:
     @abstractmethod
     def predict(self, X):
         pass
-    @abstractmethod
-    def Rsquared(self, X):
-        pass
-

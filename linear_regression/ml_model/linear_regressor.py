@@ -82,7 +82,7 @@ class LinearRegressor(SupervisedModel):
         :type verbose: bool
         """
         self.theta = np.zeros((X.shape[0], 1))
-        self.b = np.zeros((y.shape[0], 1))
+        self.b = 0
         loss_vals = []
         epochs = []
 
@@ -101,7 +101,7 @@ class LinearRegressor(SupervisedModel):
             plt.ylabel('$L(\\theta, b)$')
             plt.show()
 
-    def predict(self, X):
+    def predict(self, X_test):
         """
         Predicts outputs for the given input data.
         
@@ -110,22 +110,35 @@ class LinearRegressor(SupervisedModel):
         :return: Predicted outputs.n
         :rtype: ndarray
         """
-        super().predict(X)
+        super().predict(X_test)
 
-        return X.T @ self.theta + self.b
+
+        return X_test.T @ self.theta + self.b
     
     def Rsquared(self, X, y):
         """
-        Calculates the R-squared metric.
+        Computes the R-squared metric.
         :param X: Inputs from training set.
         :param y: Outputs from training set.
         :rtype: float
         """
-        super.Rsquared(X)
         y_hat = self.predict(X)
         y_mean = np.mean(y)
 
-        N = np.sum((y -y_hat)**2)
-        D = np.sum((y-y_mean)**2)
+        N = np.sum((y - y_hat) ** 2)
+        D = np.sum((y - y_mean) ** 2)
+
+        if D == 0:
+            return 0.0
 
         return 1 - N/D
+    
+    def MSE(self, X, y):
+        """
+        Computes the MSE metric.
+        :param X: Inputs from training set.
+        :param y: Outputs from training set.
+        :rtype: float
+        """
+        y_hat = self.predict(X)
+        return np.mean((y - y_hat) ** 2)
