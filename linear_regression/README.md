@@ -63,21 +63,22 @@ $$
 
 Unlike L1, L2 regularization does not promote sparsity but shrinks all parameters toward zero, helping to prevent overfitting and improve the generalization of the model. It is particularly effective when all features are relevant but need to be controlled in magnitude.
 
-### \( R^2 \): Coefficient of Determination
+### $R^2$: Coefficient of Determination
 
-The \( R^2 \) metric, or coefficient of determination, measures how well a regression model explains the variance in the dependent variable (\( y \)). It ranges from 0 to 1, where higher values indicate better model performance. The formula is:
+### R²: Coefficient of Determination
 
-$$
-R^2 = 1 - \frac{\sum_{i=1}^N (y_i - \hat{y}_i)^2}{\sum_{i=1}^N (y_i - \bar{y})^2}
-$$
+The R² metric, or coefficient of determination, measures how well a regression model explains the variance in the dependent variable (y). It ranges from 0 to 1, where higher values indicate better model performance. The formula is:
 
-Here:
-- \( y_i \): Observed values.
-- \( \hat{y}_i \): Predicted values.
-- \( \bar{y} \): Mean of observed values.
-- \( N \): Number of observations.
+$R^2 = 1 - \frac{\sum_{i=1}^N (y_i - \hat{y}_i)^2}{\sum_{i=1}^N (y_i - \bar{y})^2}$
 
-An \( R^2 \) value close to 1 indicates that the model explains most of the variability in \( y \).
+Where:
+- $y_i$: Observed values.
+- $\hat{y}_i$: Predicted values.
+- $\bar{y}$: Mean of observed values.
+- $N$: Number of observations.
+
+An $R^2$ value close to 1 indicates that the model explains most of the variability in $y$.
+
 
 
 # Example: Fuel Consumption Modeling
