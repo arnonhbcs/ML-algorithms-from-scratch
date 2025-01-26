@@ -64,7 +64,7 @@ $$
 Unlike L1, L2 regularization does not promote sparsity but shrinks all parameters toward zero, helping to prevent overfitting and improve the generalization of the model. It is particularly effective when all features are relevant but need to be controlled in magnitude.
 
 ## $R^2$:
-$R^2$ measures the proportion of the variance in the target variable that is explained by the features in the model. It is computed as:
+$R^2$ measures the proportion of the variance in the target variable that is explained by the features in the model. It is computed as follows.
 
 
 $$
