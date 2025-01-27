@@ -31,10 +31,10 @@ $$
 \frac{\partial L}{\partial \theta} = -\frac{1}{N} \cdot \sum_{i=1}^N (y_i - x_i^T \theta - b) \cdot x_i, \quad \frac{\partial L}{\partial b} = -\frac{1}{N} \cdot \sum_{i=1}^N (y_i - x_i^T \theta - b)
 $$
 
-3. Update the parameters using the gradients and a learning rate $\eta$:
+3. Update the parameters using the gradients and a learning rate $\alpha$:
 
 $$
-\mathbf{\theta} \leftarrow \mathbf{\theta} - \eta \cdot \frac{\partial L}{\partial \theta}, \quad \mathbf{b} \leftarrow \mathbf{b} - \eta \cdot \frac{\partial L}{\partial b}
+\mathbf{\theta} \leftarrow \mathbf{\theta} - \alpha \cdot \frac{\partial L}{\partial \theta}, \quad \mathbf{b} \leftarrow \mathbf{b} - \alpha \cdot \frac{\partial L}{\partial b}
 $$
 
 4. Repeat until convergence or for a predefined number of iterations.
