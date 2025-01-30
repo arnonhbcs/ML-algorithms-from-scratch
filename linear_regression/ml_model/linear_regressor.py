@@ -17,7 +17,7 @@ class LinearRegressor(SupervisedModel):
         :type stochastic: bool
         """
         super().__init__()
-        self.theta = None  # parameters (weights)
+        self.W = None  # parameters (weights)
         self.b = None  # bias
         self.alpha = alpha
         self.lambda_ = lambda_
@@ -34,15 +34,15 @@ class LinearRegressor(SupervisedModel):
         :return: Computed loss value.
         :rtype: float
         """
-        err_squared = (y - X.T @ self.theta - self.b) ** 2
+        err_squared = (y - X.T @ self.W - self.b) ** 2
         loss = np.sum(err_squared) / (2 * y.shape[0])
 
         if self.regularization == 'None':
             pass
         elif self.regularization == 'l1':
-            loss += self.lambda_ * np.linalg.norm(self.theta, ord=1) / y.shape[0]
+            loss += self.lambda_ * np.linalg.norm(self.W, ord=1) / y.shape[0]
         elif self.regularization == 'l2':
-            loss += self.lambda_ * (np.linalg.norm(self.theta, ord=2))**2 / (2 * y.shape[0])
+            loss += self.lambda_ * (np.linalg.norm(self.W, ord=2))**2 / (2 * y.shape[0])
 
         return loss
 
@@ -54,21 +54,21 @@ class LinearRegressor(SupervisedModel):
         :type X: ndarray
         :param y: Outputs from training examples.
         :type y: ndarray
-        :return: Gradients of the loss with respect to theta and b.
+        :return: Gradients of the loss with respect to W and b.
         :rtype: tuple(ndarray, float)
         """
-        err = -(y - X.T @ self.theta - self.b) / (2 * y.shape[0])
-        dtheta = X @ err
+        err = -(y - X.T @ self.W - self.b) / (2 * y.shape[0])
+        dW = X @ err
         db = np.sum(err)
 
         if self.regularization == 'None':
             pass
         elif self.regularization == 'l1':
-            dtheta += self.lambda_ * np.sign(self.theta) / y.shape[0]
+            dW += self.lambda_ * np.sign(self.W) / y.shape[0]
         elif self.regularization == 'l2':
-            dtheta += self.lambda_ * self.theta / y.shape[0]
+            dW += self.lambda_ * self.W / y.shape[0]
 
-        return dtheta, db
+        return dW, db
 
     def fit(self, X, y, verbose=True):
         """
@@ -81,14 +81,14 @@ class LinearRegressor(SupervisedModel):
         :param verbose: Set true to plot training history.
         :type verbose: bool
         """
-        self.theta = np.zeros((X.shape[0], 1))
+        self.W = np.zeros((X.shape[0], 1))
         self.b = 0
         loss_vals = []
         epochs = []
 
         for k in range(MAX_ITER):
-            dtheta, db = self.compute_gradient(X, y)
-            self.theta = self.theta - self.alpha * dtheta
+            dW, db = self.compute_gradient(X, y)
+            self.W = self.W - self.alpha * dW
             self.b = self.b - self.alpha * db
             loss = self.compute_loss(X, y)
             loss_vals.append(loss)
@@ -98,7 +98,7 @@ class LinearRegressor(SupervisedModel):
             plt.figure()
             plt.plot(epochs, loss_vals)
             plt.xlabel('Epoch')
-            plt.ylabel('$L(\\theta, b)$')
+            plt.ylabel('$L(\\W, b)$')
             plt.show()
 
     def predict(self, X_test):
@@ -113,7 +113,7 @@ class LinearRegressor(SupervisedModel):
         super().predict(X_test)
 
 
-        return X_test.T @ self.theta + self.b
+        return X_test.T @ self.W + self.b
     
     def Rsquared(self, X, y):
         """

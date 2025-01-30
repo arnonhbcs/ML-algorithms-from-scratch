@@ -8,13 +8,12 @@ class LogisticRegressor(SupervisedModel):
         """
         Implements the Logistic Regressor Algorithm.
         """
-        super().__init__()
-        self.theta = None
-        self.b = None
         self.alpha = alpha
         self.lambda_ = lambda_
         self.regularization = regularization
-
+        self.b = None
+        self.W = None
+    
     def compute_loss(self, X, y):
         """
         Computes the model's loss function.
@@ -25,24 +24,28 @@ class LogisticRegressor(SupervisedModel):
         :return: Computed loss value.
         :rtype: float
         """
-        loss_arr = y * np.log(self.f_theta_b(X)) + (1-y) * np.log(1 - self.f_theta_b(X))
+        z = self.W @ X + self.b
+        # add small value to avoid dividing by zero
+        epsilon = 1e-5
+        y_hat = self.sigmoid(z)
         m = y.shape[0]
-        loss_val = - (1/m) * np.sum(loss_arr)
-        if self.regularization == 'l1':
-            pass
-        elif self.regularization == 'l2':
-            pass
-        return loss_val
+        loss = (-1/m) * np.sum(
+            y * np.log(y_hat + epsilon) + (1-y) * np.log(1-y_hat + epsilon)
+        )
 
-    def f_theta_b(self, X):
+        if self.regularization == 'None':
+            pass
+        elif self.regularization == 'l1':
+            loss += self.lambda_ * np.linalg.norm(self.W, ord=1) / m
+        elif self.regularization == 'l2':
+            loss += self.lambda_ * np.linalg.norm(self.W, ord=2) / (2 * m)
+        return loss
+
+    def sigmoid(self, z):
         """
-        Computes the model activation function. Using Andrew NG's notation.
-        :param X: training set inputs
-        :type X: ndarray
-        :rtype: float
+        Computes the sigmoid function.
         """
-        z = X.T @ self.theta + self.b
-        return 1 / (1 + np.exp(-z))
+        return np.exp(z) / (1 + np.exp(z))
 
     def compute_gradient(self, X, y):
         """
@@ -56,10 +59,20 @@ class LogisticRegressor(SupervisedModel):
         :rtype: tuple(ndarray, float)
         """
         m = y.shape[0]
-        dtheta = (1/m) * np.sum(self.f_theta_b(X) - y) * X
-        db = (1/m) * np.sum(self.f_theta_b(X) - y)
-        return dtheta, db
+        z = self.W @ X + self.b
+        y_hat = self.sigmoid(z)
+        dW = (1/m) * (y_hat - y) @ X.T
+        db = (1/m) * (y_hat - y)
 
+        if self.regularization == 'None':
+            pass
+        elif self.regularization == 'l1':
+            dW += self.lambda_ * np.sign(self.W) / m
+        elif self.regularization == 'l2':
+             dW += self.lambda_ * self.W / m
+
+        return dW, db
+    
     def fit(self, X, y, verbose=True):
         """
         Trains the model using gradient descent or stochastic gradient descent.
@@ -71,19 +84,20 @@ class LogisticRegressor(SupervisedModel):
         :param verbose: Set true to plot training history.
         :type verbose: bool
         """
-        self.theta = np.zeros((X.shape[0], 1))
-        self.b = 0
+        self.W = np.random.randn(X.shape[0]) * .1
+        self.W = self.W.reshape((1, X.shape[0]))
+        self.b = np.random.normal(loc=0, scale=1)
         loss_vals = []
         epochs = []
 
         for k in range(MAX_ITER):
-            dtheta, db = self.compute_gradient(X, y)
-            self.theta = self.theta - self.alpha * dtheta
+            dW, db = self.compute_gradient(X, y)
+            self.W = self.W - self.alpha * dW
             self.b = self.b - self.alpha * db
             loss = self.compute_loss(X, y)
             loss_vals.append(loss)
             epochs.append(k+1)
-            
+
         if verbose:
             plt.figure()
             plt.plot(epochs, loss_vals)
@@ -101,9 +115,6 @@ class LogisticRegressor(SupervisedModel):
         :return: Predicted outputs.n
         :rtype: ndarray
         """
-        z = self.f_theta_b(X)
-
-        if z >= THRESHOLD:
-            return 1
-        else:
-            return 0
+        z = self.W @ X + self.b
+        y_hat = self.sigmoid(z)
+        return y_hat

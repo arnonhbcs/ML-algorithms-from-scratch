@@ -1,7 +1,5 @@
 import os
 import sys
-import numpy as np
-
 current_directory = os.path.dirname(os.path.abspath(__file__))
 directory = os.path.join(current_directory, '../ml_model')
 directory = os.path.abspath(directory)
