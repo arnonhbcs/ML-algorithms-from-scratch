@@ -26,3 +26,9 @@
 -Dataset: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html
 
 - Model Performance Evaluation: https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html
+
+# Tools:
+- Pandas
+- Pandas
+- Numpy
+- Jupyter Notebook
