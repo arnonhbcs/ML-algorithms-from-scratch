@@ -38,7 +38,7 @@ class LogisticRegressor(SupervisedModel):
         elif self.regularization == 'l1':
             loss += self.lambda_ * np.linalg.norm(self.W, ord=1) / m
         elif self.regularization == 'l2':
-            loss += self.lambda_ * np.linalg.norm(self.W, ord=2) / (2 * m)
+            loss += self.lambda_ * np.linalg.norm(self.W, ord=2) ** 2 / (2 * m)
         return loss
 
     def sigmoid(self, z):
