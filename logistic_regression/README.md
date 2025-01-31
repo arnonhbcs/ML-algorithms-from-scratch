@@ -23,7 +23,7 @@
 # References
 - Logistic Regression Theory: https://www.coursera.org/learn/machine-learning
 
--Dataset: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html
+- Dataset: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html
 
 - Model Performance Evaluation: https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html
 
