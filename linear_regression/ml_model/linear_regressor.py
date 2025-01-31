@@ -2,6 +2,7 @@ from supervised_model import SupervisedModel
 import numpy as np
 import matplotlib.pyplot as plt
 from linear_regressor_parameters import *
+from math import floor
 
 class LinearRegressor(SupervisedModel):
     def __init__(self, alpha=LEARNING_RATE, lambda_=L2_REGULARIZATION_RATE, regularization='l2'):
@@ -98,7 +99,7 @@ class LinearRegressor(SupervisedModel):
             plt.figure()
             plt.plot(epochs, loss_vals)
             plt.xlabel('Epoch')
-            plt.ylabel('$L(\\W, b)$')
+            plt.ylabel('$L(W, b)$')
             plt.show()
 
     def predict(self, X_test):

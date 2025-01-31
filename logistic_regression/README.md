@@ -7,7 +7,7 @@
 ## Loss Function
 
 
-## Stochastic Gradient Descent
+## Gradient Descent
 
 
 ## Overfitting and Regularization
