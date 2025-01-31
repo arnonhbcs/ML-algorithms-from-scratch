@@ -29,6 +29,5 @@
 
 # Tools:
 - Pandas
-- Pandas
 - Numpy
 - Jupyter Notebook
