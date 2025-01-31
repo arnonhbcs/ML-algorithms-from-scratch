@@ -85,9 +85,12 @@ The results are displayed in the jupyter notebook at the 'example' directory.
 
 
 # References
-- Linear Regression Theory: https://mml-book.github.io/
+- Linear Regression Theory: 
+- - https://mml-book.github.io/
+- - https://www.coursera.org/learn/machine-learning
+
 - Dataset: https://open.canada.ca/data/en/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64/resource/d589f2bc-9a85-4f65-be2f-20f17debfcb1
-- Data Exploration: https://github.com/hakanskn/Fuel-Consumption-Prediction-Simple-Linear-Regression/blob/main/fuelconsumption-predict-simple-linear-regression.ipynb
+
 # Tools
 - Python.
 - Pandas.

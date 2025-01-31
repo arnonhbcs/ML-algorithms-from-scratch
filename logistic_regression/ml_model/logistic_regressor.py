@@ -105,7 +105,6 @@ class LogisticRegressor(SupervisedModel):
             plt.ylabel('$L(\\theta, b)$')
             plt.show()
 
-
     def predict(self, X):
         """
         Predicts outputs for the given input data.
@@ -117,4 +116,7 @@ class LogisticRegressor(SupervisedModel):
         """
         z = self.W @ X + self.b
         y_hat = self.sigmoid(z)
-        return y_hat
+        if y_hat >= THRESHOLD:
+            return 1
+        else:
+            return 0

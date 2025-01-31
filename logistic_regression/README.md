@@ -21,6 +21,8 @@
 
 
 # References
-Notation and mathematics: https://developer.ibm.com/articles/implementing-logistic-regression-from-scratch-in-python/
+- Logistic Regression Theory: https://www.coursera.org/learn/machine-learning
 
-Model Performance Evaluation: https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html
+-Dataset: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html
+
+- Model Performance Evaluation: https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html

@@ -110,9 +110,6 @@ class LinearRegressor(SupervisedModel):
         :return: Predicted outputs.n
         :rtype: ndarray
         """
-        super().predict(X_test)
-
-
         return X_test.T @ self.W + self.b
     
     def Rsquared(self, X, y):
