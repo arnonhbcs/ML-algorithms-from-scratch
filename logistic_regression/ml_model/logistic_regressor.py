@@ -25,13 +25,14 @@ class LogisticRegressor(SupervisedModel):
         :rtype: float
         """
         z = self.W @ X + self.b
-        # add small value to avoid dividing by zero
-        epsilon = 1e-5
         y_hat = self.sigmoid(z)
         m = y.shape[0]
-        loss = (-1/m) * np.sum(
-            y * np.log(y_hat + epsilon) + (1-y) * np.log(1-y_hat + epsilon)
-        )
+        loss = .0
+        for i in range(m):
+            if y[i] == 1:
+                loss += -(1/m) * np.log(y_hat[i, 0])
+            elif y[i] == 0:
+                loss += -(1/m) * np.log(1 - y_hat[i, 0])
 
         if self.regularization == 'None':
             pass
