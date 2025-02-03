@@ -17,7 +17,6 @@ class LinearRegressor(SupervisedModel):
         :param stochastic: Use stochastic gradient descent if True.
         :type stochastic: bool
         """
-        super().__init__()
         self.W = None  # parameters (weights)
         self.b = None  # bias
         self.alpha = alpha

@@ -24,7 +24,7 @@ class LogisticRegressor(SupervisedModel):
         :return: Computed loss value.
         :rtype: float
         """
-        z = self.W @ X + self.b
+        z = X.T @ self.W + self.b
         y_hat = self.sigmoid(z)
         m = y.shape[0]
         loss = .0
@@ -46,7 +46,7 @@ class LogisticRegressor(SupervisedModel):
         """
         Computes the sigmoid function.
         """
-        return np.exp(z) / (1 + np.exp(z))
+        return 1 / (1 + np.exp(-z))
 
     def compute_gradient(self, X, y):
         """
@@ -59,11 +59,17 @@ class LogisticRegressor(SupervisedModel):
         :return: Gradients of the loss with respect to theta and b.
         :rtype: tuple(ndarray, float)
         """
-        m = y.shape[0]
-        z = self.W @ X + self.b
+        m, n = X.shape
+        z = X.T @ self.W + self.b
         y_hat = self.sigmoid(z)
-        dW = (1/m) * (y_hat - y) @ X.T
-        db = (1/m) * (y_hat - y)
+        dW = np.zeros(self.W.shape)
+        for j in range(dW.shape[0]):
+            for i in range(n):
+                dW[j, 0] += (1 / m) * (
+                    np.sum(y_hat[i, 0] - y[i, 0]) * X[j, i]
+                )
+
+        db = (1/m) * np.sum(y_hat - y)
 
         if self.regularization == 'None':
             pass
@@ -85,9 +91,9 @@ class LogisticRegressor(SupervisedModel):
         :param verbose: Set true to plot training history.
         :type verbose: bool
         """
-        self.W = np.random.randn(X.shape[0]) * .1
-        self.W = self.W.reshape((1, X.shape[0]))
-        self.b = np.random.normal(loc=0, scale=1)
+        self.W = np.random.normal(loc=.0, scale=.1, size=X.shape[0])
+        self.W = self.W.reshape((X.shape[0], 1))
+        self.b = 0
         loss_vals = []
         epochs = []
 
@@ -115,9 +121,25 @@ class LogisticRegressor(SupervisedModel):
         :return: Predicted outputs.n
         :rtype: ndarray
         """
-        z = self.W @ X + self.b
+        y_hat = np.zeros((X.shape[1], 1))
+        z = X.T @ self.W + self.b
         y_hat = self.sigmoid(z)
-        if y_hat >= THRESHOLD:
-            return 1
-        else:
-            return 0
+        m = y_hat.shape[0]
+        for i in range(m):
+            if y_hat[i, 0] >= THRESHOLD:
+                y_hat[i, 0] = 1
+            else:
+                y_hat[i, 0] = 0
+
+        return y_hat
+        
+    def accuracy(self, y, y_hat):
+        """
+        Computes model accuracy.
+
+        :param y: real outputs from test set.
+        :param y_hat: predicted outputs from test set.
+        :return: number ranging from 0 to 1.
+        :rtype: float
+        """
+        pass
