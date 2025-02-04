@@ -16,11 +16,7 @@ Each algorithm includes an example problem (regression or classification) that d
 ## Table of Contents
 
 1. [Installation](#installation)
-2. [Usage Examples](#usage-examples)
-3. [Project Structure](#project-structure)
-4. [Contributing](#contributing)
-5. [License](#license)
-6. [References](#references)
+
 
 ---
 
