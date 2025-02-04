@@ -182,12 +182,29 @@ class LogisticRegressor(SupervisedModel):
             return 0.0
         
         return TP / (TP + FN)
-
-    
+ 
     def plot_ROC_curve(self, X, y):
         """
         Plots model ROC curve.
         :param X: real inputs from test set.
         :param y: real outputs from test set.
         """
-        pass
+        y_hat = self.predict(X)
+        TP = np.sum((y_hat == 1) & (y == 1))
+        FN = np.sum((y_hat == 0) & (y == 1))
+        FP = np.sum((y_hat == 1) & (y == 0))
+        TN = np.sum((y_hat == 0) & (y == 0))
+
+        TP_rate = TP / (TP + FN)
+        FP_rate = FP / (FP + TN)
+
+        x_random = np.linspace(0, 1, 100)
+        y_random = x_random
+
+        plt.figure()
+        plt.plot(x_random, y_random, linestyle=':', color='red', label='Random Classifier')
+        plt.plot(x=FP_rate, y=TP_rate, color='blue', label='ROC Curve')
+        plt.xlabel('False positive rate.')
+        plt.ylabel('True positive rate.')
+
+
