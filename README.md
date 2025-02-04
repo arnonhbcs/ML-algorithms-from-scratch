@@ -29,5 +29,5 @@ Each algorithm includes an example problem (regression or classification) that d
 **Clone the repository**:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/ml_from_scratch.git
+   git clone https://github.com/arnonhbcs/ml_from_scratch.git
    cd ml_from_scratch
