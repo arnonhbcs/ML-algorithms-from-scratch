@@ -145,11 +145,49 @@ class LogisticRegressor(SupervisedModel):
         y_hat = self.predict(X)
         return np.mean(y == y_hat) # computes TN and TP
     
-    def plot_ROC(self, X, y):
+    def precision(self, X, y):
+        """
+        Computes model precision.
+
+        :param X: real inputs from test set.
+        :param y: real outputs from test set.
+        :return: number ranging from 0 to 1.
+        :rtype: float
+        """
+        y_hat = self.predict(X)
+        
+        TP = np.sum((y_hat == 1) & (y == 1))
+        FP = np.sum((y_hat == 1) & (y == 0))
+
+        if TP + FP == 0:
+            return 0.0
+        
+        return TP / (TP + FP)
+
+    def recall(self, X, y):
+        """
+        Computes model recall.
+
+        :param X: real inputs from test set.
+        :param y: real outputs from test set.
+        :return: number ranging from 0 to 1.
+        :rtype: float
+        """
+        y_hat = self.predict(X)
+        
+        TP = np.sum((y_hat == 1) & (y == 1))
+        FN = np.sum((y_hat == 0) & (y == 1))
+
+        if TP + FN == 0:
+            return 0.0
+        
+        return TP / (TP + FN)
+
+    
+    def plot_ROC_curve(self, X, y):
         """
         Plots model ROC curve.
         :param X: real inputs from test set.
         :param y: real outputs from test set.
         """
         pass
-
