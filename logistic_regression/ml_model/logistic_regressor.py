@@ -25,14 +25,14 @@ class LogisticRegressor(SupervisedModel):
         :rtype: float
         """
         z = X.T @ self.W + self.b
-        y_hat = self.sigmoid(z)
+        y_hat = np.vectorize(self.sigmoid)(z)
         m = y.shape[0]
         loss = .0
         for i in range(m):
             if y[i] == 1:
-                loss += -(1/m) * np.log(y_hat[i, 0])
+                loss += -(1/m) * np.log(y_hat[i, 0] + EPSILON)
             elif y[i] == 0:
-                loss += -(1/m) * np.log(1 - y_hat[i, 0])
+                loss += -(1/m) * np.log(1 - y_hat[i, 0] + EPSILON)
 
         if self.regularization == 'None':
             pass
@@ -46,7 +46,11 @@ class LogisticRegressor(SupervisedModel):
         """
         Computes the sigmoid function.
         """
-        return 1 / (1 + np.exp(-z))
+        return np.where(
+            z >= 0,
+            1 / (1 + np.exp(-z)),
+            np.exp(z) / (1 + np.exp(z))
+        )
 
     def compute_gradient(self, X, y):
         """
@@ -61,13 +65,11 @@ class LogisticRegressor(SupervisedModel):
         """
         m, n = X.shape
         z = X.T @ self.W + self.b
-        y_hat = self.sigmoid(z)
+        y_hat = np.vectorize(self.sigmoid)(z)
         dW = np.zeros(self.W.shape)
         for j in range(dW.shape[0]):
             for i in range(n):
-                dW[j, 0] += (1 / m) * (
-                    np.sum(y_hat[i, 0] - y[i, 0]) * X[j, i]
-                )
+                dW[j, 0] += (1 / m) * (y_hat[i, 0] - y[i, 0]) * X[j, i]
 
         db = (1/m) * np.sum(y_hat - y)
 
