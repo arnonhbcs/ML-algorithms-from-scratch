@@ -133,13 +133,23 @@ class LogisticRegressor(SupervisedModel):
 
         return y_hat
         
-    def accuracy(self, y, y_hat):
+    def accuracy(self, X, y):
         """
         Computes model accuracy.
 
+        :param X: real inputs from test set.
         :param y: real outputs from test set.
-        :param y_hat: predicted outputs from test set.
         :return: number ranging from 0 to 1.
         :rtype: float
         """
+        y_hat = self.predict(X)
+        return np.mean(y == y_hat) # computes TN and TP
+    
+    def plot_ROC(self, X, y):
+        """
+        Plots model ROC curve.
+        :param X: real inputs from test set.
+        :param y: real outputs from test set.
+        """
         pass
+
