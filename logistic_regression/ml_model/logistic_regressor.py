@@ -169,33 +169,21 @@ class LogisticRegressor(SupervisedModel):
         FN = np.sum((y_hat == 0) & (y == 1))
         return TP / (TP + FN) if TP + FN > 0 else 0.0
     
-    def plot_ROC_curve(self, X, y):
+
+    def f1_score(self, X, y):
         """
-        Plots model ROC curve without using sklearn.
+        Computes model F1-score.
         :param X: Inputs from test set.
         :type X: ndarray
         :param y: Outputs from test set.
         :type y: ndarray
+        :return: F1-score value.
+        :rtype: float
         """
-        y_hat_probs = self.predict_probability(X).flatten()
-        thresholds = np.linspace(0, 1, 100)
-        tpr = []
-        fpr = []
-        
-        for threshold in thresholds:
-            y_pred = (y_hat_probs >= threshold).astype(int)
-            TP = np.sum((y_pred == 1) & (y == 1))
-            FP = np.sum((y_pred == 1) & (y == 0))
-            FN = np.sum((y_pred == 0) & (y == 1))
-            TN = np.sum((y_pred == 0) & (y == 0))
-            
-            tpr.append(TP / (TP + FN) if (TP + FN) > 0 else 0)
-            fpr.append(FP / (FP + TN) if (FP + TN) > 0 else 0)
-        
-        plt.figure()
-        plt.plot(fpr, tpr, color='blue', label='ROC Curve')
-        plt.plot([0, 1], [0, 1], linestyle='--', color='red', label='Random Classifier')
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        plt.legend()
-        plt.show()
+        precision = self.precision(X, y)
+        recall = self.recall(X, y)
+        return 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+    
+
+    
+    
