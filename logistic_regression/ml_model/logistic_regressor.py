@@ -95,7 +95,7 @@ class LogisticRegressor(SupervisedModel):
         """
         self.W = np.random.normal(loc=.0, scale=.1, size=X.shape[0])
         self.W = self.W.reshape((X.shape[0], 1))
-        self.b = 0
+        self.b = np.random.normal(loc=0, scale=.05)
         loss_vals = []
         epochs = []
 
