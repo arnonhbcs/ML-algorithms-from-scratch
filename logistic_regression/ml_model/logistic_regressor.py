@@ -2,6 +2,7 @@ from supervised_model import SupervisedModel
 import numpy as np
 from logistic_regressor_parameters import *
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 
 class LogisticRegressor(SupervisedModel):
     def __init__(self, alpha=LEARNING_RATE, threshold=THRESHOLD, lambda_=L2_REGULARIZATION_RATE, regularization='l2'):
@@ -77,6 +78,20 @@ class LogisticRegressor(SupervisedModel):
             dW += self.lambda_ * self.W / m
 
         return dW, db
+    
+    def fit_sgd(self, X, y, BATCH_SIZE=BATCH_SIZE, verbose=True):
+        """
+        Trains the model using stochastic gradient descent.
+        :param X: Inputs from training examples
+        :type X: ndarray
+        :param y: Outputs from training examples
+        :type y: ndarray
+        :param BATCH_SIZE: size of training batch
+        :type BATCH_SIZE: int
+        :param verbose: Set true to plot training history.
+        :type verbose: bool
+        """
+        pass
 
     def fit(self, X, y, verbose=True):
         """
@@ -169,7 +184,6 @@ class LogisticRegressor(SupervisedModel):
         FN = np.sum((y_hat == 0) & (y == 1))
         return TP / (TP + FN) if TP + FN > 0 else 0.0
     
-
     def f1_score(self, X, y):
         """
         Computes model F1-score.

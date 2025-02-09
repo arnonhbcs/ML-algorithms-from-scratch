@@ -4,3 +4,4 @@ L2_REGULARIZATION_RATE = 0.000001
 MAX_ITER = 5000 # maximum number of iterations
 THRESHOLD = 0.55
 EPSILON = 1e-20
+BATCH_SIZE = 0.5
