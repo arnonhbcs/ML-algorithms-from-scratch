@@ -14,7 +14,7 @@ In linear regression, we will fit a function $f(\mathbf{x}) = x^T \mathbf{W} + \
 Given that our sample is iid (independent, identically distributed), we can assume $y_n \ \tilde \ N (f(\mathbf{x}), \sigma^2)$
 
 $$
-log[p(y | x)] = log [\Pi_{i}^{N} exp(-(y - x^T W - b))^2 / (2 \sigma^2)] = \frac{1}{\sigma^2} \cdot \sum_{i}^{N} (y - x^T W - b)^2
+log[p(y | x)]  = \frac{1}{\sigma^2} \cdot \sum_{i}^{N} (y - x^T W - b)^2
 $$
 
 Take the loss function $L(\mathbf{W}, \mathbf{b}) = \frac{1}{2N} \cdot \sum_ {i}^{N} (y - x^T \cdot W - b)^2$. We must find $W$ and $b$ to minimize this function. This will be done using the Gradient Descent Algorithm.
