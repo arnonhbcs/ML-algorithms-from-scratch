@@ -20,7 +20,7 @@ $$
 L(\mathbf{W}, b) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(p_i) + (1-y_i) \log(1-p_i) \right]
 $$
 
-where \( p_i = \sigma(\mathbf{x}_i^T\mathbf{W} + b) \) is the predicted probability for sample \( i \), and \( y_i \) is the true binary label. This convex loss function allows efficient optimization via Gradient Descent.
+where $p_i = \sigma(\mathbf{x}_i^T\mathbf{W} + b)$ is the predicted probability for sample  $i$, and  $y_i$ is the true binary label. This convex loss function allows efficient optimization via Gradient Descent.
 
 ## Gradient Descent
 
