@@ -26,4 +26,4 @@ Each algorithm includes an example problem (regression or classification) that d
 
    ```bash
    git clone https://github.com/arnonhbcs/ml_from_scratch.git
-   cd ml_from_scratch
+   cd ML-algorithms-from-scratch
