@@ -26,13 +26,11 @@ where $p_i = \sigma(\mathbf{x}_i^T\mathbf{W} + b)$ is the predicted probability 
 
 Gradient Descent is used to minimize the cross-entropy loss by iteratively updating the model parameters \( \mathbf{W} \) and \( b \). The gradients of the loss with respect to these parameters are given by:
 
-$ \frac{\partial L}{\partial \mathbf{W}} = \frac{1}{N} \sum_{i=1}^{N} \left( p_i - y_i \right) \mathbf{x}_i, \quad \frac{\partial L}{\partial b} = \frac{1}{N} \sum_{i=1}^{N} \left( p_i - y_i \right) $
+$\frac{\partial L}{\partial \mathbf{W}} = \frac{1}{N} \sum_{i=1}^{N} \left( p_i - y_i \right) \mathbf{x}_i, \quad \frac{\partial L}{\partial b} = \frac{1}{N} \sum_{i=1}^{N} \left( p_i - y_i \right)$
 
-The parameters are then updated using the learning rate \( \alpha \):
+The parameters are then updated using the learning rate $\alpha$:
 
-$$
-\mathbf{W} \leftarrow \mathbf{W} - \alpha \cdot \frac{\partial L}{\partial \mathbf{W}}, \quad b \leftarrow b - \alpha \cdot \frac{\partial L}{\partial b}
-$$
+$\mathbf{W} \leftarrow \mathbf{W} - \alpha \cdot \frac{\partial L}{\partial \mathbf{W}}, \quad b \leftarrow b - \alpha \cdot \frac{\partial L}{\partial b}$
 
 These steps are repeated until the loss converges or the maximum number of iterations is reached.
 
@@ -43,14 +41,14 @@ Logistic regression, like other models, can overfit the training data, especiall
 - **L1 Regularization (Lasso):**  
   Adds a penalty proportional to the absolute values of the weights:
   
-  $ L(\mathbf{W}, b) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(p_i) + (1-y_i) \log(1-p_i) \right] + \lambda \sum_{j} |W_j| $
+  $L(\mathbf{W}, b) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(p_i) + (1-y_i) \log(1-p_i) \right] + \lambda \sum_{j} |W_j|$
   
   This technique encourages sparsity in the model parameters, effectively performing feature selection.
 
 - **L2 Regularization (Ridge):**  
   Adds a penalty proportional to the square of the weights:
   
-  $ L(\mathbf{W}, b) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(p_i) + (1-y_i) \log(1-p_i) \right] + \lambda \sum_{j} W_j^2 $
+  $L(\mathbf{W}, b) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(p_i) + (1-y_i) \log(1-p_i) \right] + \lambda \sum_{j} W_j^2$
   
   L2 regularization shrinks the weights towards zero, reducing model complexity without enforcing sparsity.
 
