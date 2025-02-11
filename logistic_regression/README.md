@@ -26,7 +26,9 @@ where $p_i = \sigma(\mathbf{x}_i^T\mathbf{W} + b)$ is the predicted probability 
 
 Gradient Descent is used to minimize the cross-entropy loss by iteratively updating the model parameters \( \mathbf{W} \) and \( b \). The gradients of the loss with respect to these parameters are given by:
 
-$\frac{\partial L}{\partial \mathbf{W}} = \frac{1}{N} \sum_{i=1}^{N} \left( p_i - y_i \right) \mathbf{x}_i, \quad \frac{\partial L}{\partial b} = \frac{1}{N} \sum_{i=1}^{N} \left( p_i - y_i \right) $
+$\frac{\partial L}{\partial \mathbf{W}} = \frac{1}{N} \sum_{i=1}^{N} \left( p_i - y_i \right) \mathbf{x}_i$ 
+
+$\quad \frac{\partial L}{\partial b} = \frac{1}{N} \sum_{i=1}^{N} \left( p_i - y_i \right) $
 
 The parameters are then updated using the learning rate $\alpha$:
 
