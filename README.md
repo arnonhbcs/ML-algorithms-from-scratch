@@ -1,4 +1,4 @@
-# ML From Scratch
+# ML Algorithms From Scratch
 
 This repository contains implementations of some Machine Learning algorithms built **from scratch**, using only **NumPy** for basic numeric operations and mathematical calculations. The goal is to strengthen the understanding of how these models work internally, without relying on high-level libraries (such as scikit-learn or TensorFlow).
 
