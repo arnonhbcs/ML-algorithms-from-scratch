@@ -14,4 +14,3 @@ class SupervisedModel:
     @abstractmethod
     def predict(self, X):
         pass
-
