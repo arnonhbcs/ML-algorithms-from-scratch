@@ -96,6 +96,7 @@ class LinearRegressor(SupervisedModel):
         
         if verbose:
             plt.figure()
+            plt.grid(True)
             plt.plot(epochs, loss_vals)
             plt.xlabel('Epoch')
             plt.ylabel('$L(W, b)$')

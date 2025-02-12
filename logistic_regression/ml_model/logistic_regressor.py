@@ -117,6 +117,7 @@ class LogisticRegressor(SupervisedModel):
 
         if verbose:
             plt.figure()
+            plt.grid(True)
             plt.plot(epochs, loss_vals)
             plt.xlabel('Epoch')
             plt.ylabel('$L(\theta, b)$')
