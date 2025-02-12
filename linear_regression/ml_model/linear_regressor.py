@@ -7,7 +7,7 @@ from math import floor
 class LinearRegressor(SupervisedModel):
     def __init__(self, alpha=LEARNING_RATE, lambda_=L2_REGULARIZATION_RATE, regularization='l2'):
         """
-        Implements the Linear Regression Algorithm
+        Implements the Linear Regression Algorithm.
         :param alpha: Learning rate.
         :type alpha: float
         :param lambda_: Regularization parameter.
