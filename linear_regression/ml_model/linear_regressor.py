@@ -14,8 +14,6 @@ class LinearRegressor(SupervisedModel):
         :type lambda_: float
         :param regularization: Type of regularization to apply ('l1', 'l2', or 'None').
         :type regularization: str
-        :param stochastic: Use stochastic gradient descent if True.
-        :type stochastic: bool
         """
         self.W = None  # parameters (weights)
         self.b = None  # bias
